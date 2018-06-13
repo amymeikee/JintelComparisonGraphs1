@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:jintel/labresultspage.dart';
+import 'package:jintel/healthpage.dart';
 
 void main() => runApp(new JintelApp());
 
@@ -15,7 +15,7 @@ class JintelApp extends StatelessWidget {
         primarySwatch: Colors.red
       ),
       routes: <String, WidgetBuilder>{
-        '/labresults': (BuildContext context) => new LabResultsPage(),
+        '/health': (BuildContext context) => new HealthPage(),
       },
       home: new HomePage()
     );
@@ -30,6 +30,18 @@ class HomePage extends StatelessWidget {
           title: new Text('Jintel'),
           backgroundColor: Colors.red,
         ),
+        body: new Container(
+          padding: const EdgeInsets.only(left: 15.0),
+          child: new Row(
+            children: <Widget>[
+              new Expanded(
+                child: new Center(
+                  child: new Text("None of the data in this application is based on real values or estimates."),
+                )
+              )
+            ],
+          ),
+        ),
         drawer: new Drawer(
           child: new ListView(
             padding: EdgeInsets.zero,
@@ -38,7 +50,7 @@ class HomePage extends StatelessWidget {
                 currentAccountPicture: new CircleAvatar(
                   backgroundColor: Colors.white,
                 ),
-                accountName: new Text('Jintel Health Patient'),
+                accountName: new Text('User'),
                 accountEmail: new Text('user@email.com'),
                 decoration: new BoxDecoration(
                   color: Colors.red
@@ -47,16 +59,9 @@ class HomePage extends StatelessWidget {
               new ListTile(
                 title: new Text('Health'),
                 onTap: () {
-                  print('Tapped Health');
-                  Navigator.pop(context);
-                },
-              ),
-              new ListTile(
-                title: new Text('Lab Results'),
-                onTap: () {
                   Navigator.push(
                     context,
-                    new MaterialPageRoute(builder: (context) => new LabResultsPage()),
+                    new MaterialPageRoute(builder: (context) => new HealthPage()),
                   );
                 },
               ),
