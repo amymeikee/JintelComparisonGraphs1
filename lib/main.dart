@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:jintel/healthpage.dart';
+import 'package:jintel/settingspage.dart';
 
 void main() => runApp(new JintelApp());
 
@@ -16,6 +17,7 @@ class JintelApp extends StatelessWidget {
       ),
       routes: <String, WidgetBuilder>{
         '/health': (BuildContext context) => new HealthPage(),
+        '/settings': (BuildContext context) => new SettingsPage()
       },
       home: new HomePage()
     );
@@ -68,8 +70,10 @@ class HomePage extends StatelessWidget {
               new ListTile(
                 title: new Text('Settings'),
                 onTap: () {
-                  print('Tapped Settings');
-                  Navigator.pop(context);
+                  Navigator.push(
+                    context,
+                    new MaterialPageRoute(builder: (context) => new SettingsPage()),
+                  );
                 }
               )
             ],
