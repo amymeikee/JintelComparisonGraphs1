@@ -1,12 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:jintel/healthpage.dart';
 import 'package:jintel/settingspage.dart';
+import 'package:jintel/loginpage.dart';
+import 'package:jintel/contactpage.dart';
+import 'package:jintel/calendarpage.dart';
+import 'package:jintel/reminderspage.dart';
 
 void main() => runApp(new JintelApp());
 
 class JintelApp extends StatelessWidget {
   final String title;
   JintelApp({Key key, this.title}) : super(key: key);
+
 
   @override
   Widget build(BuildContext context) {
@@ -16,15 +21,33 @@ class JintelApp extends StatelessWidget {
         primarySwatch: Colors.red
       ),
       routes: <String, WidgetBuilder>{
+        '/home': (BuildContext context) => new HomePage(),
         '/health': (BuildContext context) => new HealthPage(),
-        '/settings': (BuildContext context) => new SettingsPage()
+        '/settings': (BuildContext context) => new SettingsPage(),
+        '/login': (BuildContext context) => new LoginPage(),
+        '/contact': (BuildContext context) => new ContactPage(),
+        '/calendar': (BuildContext context) => new CalendarPage(),
+        '/reminders': (BuildContext context) => new RemindersPage()
       },
       home: new HomePage()
     );
   }
 }
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
+  HomePage({Key key}) : super(key: key);
+   @override
+  HomePageState createState() => new HomePageState();
+}
+
+
+class HomePageState extends State<HomePage> {
+  @override
+  initState() {
+    super.initState();
+  }
+
+
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
@@ -38,10 +61,118 @@ class HomePage extends StatelessWidget {
             children: <Widget>[
               new Expanded(
                 child: new Center(
-                  child: new Text("None of the data in this application is based on real values or estimates."),
+                  child: new Column(
+                    children: <Widget>[
+                      new Container(
+                        margin: EdgeInsets.all(10.0),
+                        child: new Center(
+                          child: new Text("Reminders", style: TextStyle(fontSize: 20.0))
+                        )
+                      ),
+                      new Container(
+                        margin: EdgeInsets.all(10.0),
+                        child: new ListView(
+                          shrinkWrap: true,
+                          children: <Widget>[
+                            new Card(
+                              child: new Column(
+                                mainAxisSize: MainAxisSize.min,
+                                children: <Widget>[
+                                  const ListTile(
+                                    leading: const Icon(Icons.calendar_today),
+                                    title: const Text('Appointment'),
+                                    subtitle: const Text('7 AM today'),
+                                  ),
+                                  new ButtonTheme.bar(
+                                    child: new ButtonBar(
+                                      children: <Widget>[
+                                        new FlatButton(
+                                          child: new Text('View Reminder'),
+                                          onPressed: () => {}
+                                        ),
+                                        new FlatButton(
+                                          child: new Text('Delete Reminder'),
+                                          onPressed: () => {}
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            new Card(
+                              child: new Column(
+                                mainAxisSize: MainAxisSize.min,
+                                children: <Widget>[
+                                  const ListTile(
+                                    leading: const Icon(Icons.calendar_today),
+                                    title: const Text('Appointment'),
+                                    subtitle: const Text('6 PM today'),
+                                  ),
+                                  new ButtonTheme.bar(
+                                    child: new ButtonBar(
+                                      children: <Widget>[
+                                        new FlatButton(
+                                          child: new Text('View Reminder'),
+                                          onPressed: () => {}
+                                        ),
+                                        new FlatButton(
+                                          child: new Text('Delete Reminder'),
+                                          onPressed: () => {},
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            new Card(
+                              child: new Column(
+                                mainAxisSize: MainAxisSize.min,
+                                children: <Widget>[
+                                  const ListTile(
+                                    leading: const Icon(Icons.calendar_today),
+                                    title: const Text('Appointment'),
+                                    subtitle: const Text('7 AM tomorrow'),
+                                  ),
+                                  new ButtonTheme.bar(
+                                    child: new ButtonBar(
+                                      children: <Widget>[
+                                        new FlatButton(
+                                          child: new Text('View Reminder'),
+                                          onPressed: () => {}
+                                        ),
+                                        new FlatButton(
+                                          child: new Text('Delete Reminder'),
+                                          onPressed: () => {},
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            new Container(
+                              padding: EdgeInsets.only(top: 10.0),
+                              child: new Center(
+                              child: new RaisedButton(
+                                child: new Text('Set a Reminder', style: new TextStyle(color: Colors.white),),
+                                color: Colors.red,
+                                onPressed: () => Navigator.push(
+                                                  context,
+                                                  new MaterialPageRoute(builder: (context) => new RemindersPage()),
+                                                )
+                              ),
+                            ),
+                            )
+                          ],
+                        ),
+                      )
+                    ]
+                  )
                 )
               )
-            ],
+            ]
           ),
         ),
         drawer: new Drawer(
@@ -59,6 +190,15 @@ class HomePage extends StatelessWidget {
                 ),
               ),
               new ListTile(
+                title: new Text('Login'),
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    new MaterialPageRoute(builder: (context) => new LoginPage()),
+                  );
+                },
+              ),
+              new ListTile(
                 title: new Text('Health'),
                 onTap: () {
                   Navigator.push(
@@ -73,6 +213,24 @@ class HomePage extends StatelessWidget {
                   Navigator.push(
                     context,
                     new MaterialPageRoute(builder: (context) => new SettingsPage()),
+                  );
+                }
+              ),
+              new ListTile(
+                title: new Text('Contact Us'),
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    new MaterialPageRoute(builder: (context) => new ContactPage()),
+                  );
+                }
+              ),
+              new ListTile(
+                title: new Text('Calendar'),
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    new MaterialPageRoute(builder: (context) => new CalendarPage()),
                   );
                 }
               )
